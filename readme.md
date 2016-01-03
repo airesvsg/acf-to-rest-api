@@ -50,12 +50,12 @@ Editing the fields
 ====
 The fields should be sent into the key `fields`.
 
-![Field Name](http://airesgoncalves.com.br/screenshot/acf-to-wp-rest-api/readme/acf-field-name.jpg)
+![Field Name](http://airesgoncalves.com.br/screenshot/acf-to-wp-rest-api/readme/field-name.jpg)
 
-**Action:** http://localhot/wp-json/acf/v2/post/1
+**Action:** http://localhost/wp-json/acf/v2/post/1
 
 ```HTML
-<form action="http://localhot/wp-json/acf/v2/post/1" method="POST">
+<form action="http://localhost/wp-json/acf/v2/post/1" method="POST">
 	<?php 
 		// http://v2.wp-api.org/guide/authentication
 		wp_nonce_field( 'wp_rest' ); 
@@ -65,10 +65,10 @@ The fields should be sent into the key `fields`.
 </form>
 ```
 
-**Action:** http://localhot/wp-json/wp/v2/posts/1
+**Action:** http://localhost/wp-json/wp/v2/posts/1
 
 ```HTML
-<form action="http://localhot/wp-json/wp/v2/posts/1" method="POST">
+<form action="http://localhost/wp-json/wp/v2/posts/1" method="POST">
 	<?php 
 		// http://v2.wp-api.org/guide/authentication
 		wp_nonce_field( 'wp_rest' ); 
@@ -91,7 +91,7 @@ add_filter( 'acf/rest_api/key', function( $key ) {
 Now, the fields should be sent into the key `acf_fields`
 
 ```HTML
-<form action="http://localhot/wp-json/acf/v2/post/1" method="POST">
+<form action="http://localhost/wp-json/acf/v2/post/1" method="POST">
 	<?php 
 		// http://v2.wp-api.org/guide/authentication
 		wp_nonce_field( 'wp_rest' ); 
