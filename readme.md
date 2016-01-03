@@ -83,9 +83,9 @@ The fields should be sent into the key `fields`.
 Use the filter `acf/rest_api/key` to change the key `fields`.
 
 ```PHP
-add_filter( 'acf/rest_api/key', function( $key ) {
+add_filter( 'acf/rest_api/key', function( $key, $request, $type ) {
 	return 'acf_fields';
-} );
+}, 10, 3 );
 ```
 
 Now, the fields should be sent into the key `acf_fields`

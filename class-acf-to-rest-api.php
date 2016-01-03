@@ -115,10 +115,6 @@ if ( ! class_exists( 'ACF_To_REST_API' ) ) {
 		}
 
 		public static function missing_notice() {
-			if ( ! function_exists( 'is_plugin_active' ) ) {
-				include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-			}
-
 			if ( ! self::is_plugin_active( 'rest-api' ) ) {
 				include dirname( __FILE__ ) . '/includes/admin/views/html-notice-missing-rest-api.php';
 			}
