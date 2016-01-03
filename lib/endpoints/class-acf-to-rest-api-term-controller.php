@@ -26,7 +26,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Term_Controller' ) ) {
 				return parent::get_item( $request );
 			}
 
-			return new WP_Error( 'rest_no_route', __( 'No route was found matching the URL and request method' ), array( 'status' => 404 ) );
+			return new WP_Error( 'rest_no_route', __( 'No route was found matching the URL and request method', 'acf-to-rest-api' ), array( 'status' => 404 ) );
 		}
 
 		protected static function show( $object ) {
