@@ -89,6 +89,18 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 				$this->format_id( $request );
 				if ( $this->id && is_array( $data ) ) {
 					$fields = get_field_objects( $this->id );
+					
+					if ( ! $fields ) {
+						if ( function_exists( 'get_field_object' ) ) {
+							foreach ( array_keys( $data ) as $selector ) {
+								$field = get_field_object( $selector, $this->id, array( 'load_value' => true ) );
+								if ( $field ) {
+									$fields[$selector] = $field;
+								}
+							}							
+						}
+					}
+
 					if ( $fields ) {
 						$item = array(
 							'id'     => $this->id,
