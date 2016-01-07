@@ -4,7 +4,7 @@
  * Description: Edit, Get and Puts ACF fields in WordPress REST API.
  * Author: Aires Gonçalves
  * Author URI: http://github.com/airesvsg
- * Version: 2.0.1
+ * Version: 2.0.2
  * Plugin URI: http://github.com/airesvsg/acf-to-rest-api
  */
 
@@ -16,7 +16,7 @@ if ( ! class_exists( 'ACF_To_REST_API' ) ) {
 
 	class ACF_To_REST_API {
 
-		const VERSION = '2.0.1';
+		const VERSION = '2.0.2';
 
 		public static function init() {
 			self::includes();
@@ -26,6 +26,7 @@ if ( ! class_exists( 'ACF_To_REST_API' ) ) {
 		private static function includes() {
 			if ( self::is_plugin_active( 'all' ) ) {
 				require_once dirname( __FILE__ ) . '/lib/endpoints/class-acf-to-rest-api-controller.php';
+				require_once dirname( __FILE__ ) . '/lib/endpoints/class-acf-to-rest-api-option-controller.php';
 				require_once dirname( __FILE__ ) . '/lib/endpoints/class-acf-to-rest-api-term-controller.php';
 				require_once dirname( __FILE__ ) . '/lib/endpoints/class-acf-to-rest-api-attachment-controller.php';
 			}
@@ -34,7 +35,7 @@ if ( ! class_exists( 'ACF_To_REST_API' ) ) {
 		private static function hooks() {
 			add_action( 'init', array( __CLASS__, 'load_plugin_textdomain' ) );
 			if ( self::is_plugin_active( 'all' ) ) {
-				add_action( 'rest_api_init', array( __CLASS__, 'create_rest_routes' ), 10 );				
+				add_action( 'rest_api_init', array( __CLASS__, 'create_rest_routes' ), 10 );
 			} else {
 				add_action( 'admin_notices', array( __CLASS__, 'missing_notice' ) );
 			}
@@ -46,7 +47,7 @@ if ( ! class_exists( 'ACF_To_REST_API' ) ) {
 		}
 
 		public static function create_rest_routes() {
-			$default = array( 'user', 'comment', 'term' );
+			$default = array( 'user', 'comment', 'term', 'option' );
 			$types   = get_post_types( array( 'show_in_rest' => true ) );
 			
 			if ( $types && isset( $types['attachment'] ) ) {
@@ -59,9 +60,11 @@ if ( ! class_exists( 'ACF_To_REST_API' ) ) {
 			if ( is_array( $types ) && count( $types ) > 0 ) {
 				foreach( $types as $type ) {
 					if ( 'term' == $type ) {
-						$controller = new ACF_To_REST_API_Term_Controller( 'term' );						
+						$controller = new ACF_To_REST_API_Term_Controller( $type );						
 					} elseif ( 'media' == $type ) {
-						$controller = new ACF_To_REST_API_Attachment_Controller( 'media' );						
+						$controller = new ACF_To_REST_API_Attachment_Controller( $type );
+					} elseif ( 'option' == $type ) {
+						$controller = new ACF_To_REST_API_Option_Controller( $type );
 					} else {
 						$controller = new ACF_To_REST_API_Controller( $type );
 					}

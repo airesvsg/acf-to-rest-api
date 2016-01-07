@@ -9,17 +9,18 @@ Installation
 
 Endpoints
 ====
-All endpoints are **EDITABLE** and **READABLE**, but it depends on your permission.
 
-| Endpoint |
-|----------|
-| /wp-json/acf/v2/post/**{id}** |
-| /wp-json/acf/v2/page/**{id}** |
-| /wp-json/acf/v2/user/**{id}** |
-| /wp-json/acf/v2/term/**{taxonomy}**/**{id}** |
-| /wp-json/acf/v2/comment/**{id}** |
-| /wp-json/acf/v2/media/**{id}** |
-| /wp-json/acf/v2/**{post-type}**/**{id}** |
+| Endpoint | READABLE | EDITABLE |
+|----------|:--------:|:--------:|
+| /wp-json/acf/v2/post/**{id}** | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) |
+| /wp-json/acf/v2/page/**{id}** | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) |
+| /wp-json/acf/v2/user/**{id}** | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) |
+| /wp-json/acf/v2/term/**{taxonomy}**/**{id}** | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) |
+| /wp-json/acf/v2/comment/**{id}** | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) |
+| /wp-json/acf/v2/media/**{id}** | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) |
+| /wp-json/acf/v2/**{post-type}**/**{id}** | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) |
+| /wp-json/acf/v2/options | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) |
+| /wp-json/acf/v2/options/**{name}** | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) |
 
 Filters
 ====
@@ -50,7 +51,7 @@ Editing the fields
 ====
 The fields should be sent into the key `fields`.
 
-![Field Name](http://airesgoncalves.com.br/screenshot/acf-to-wp-rest-api/readme/field-name.jpg)
+![Field Name](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/field-name.jpg)
 
 **Action:** http://localhost/wp-json/acf/v2/post/1
 
