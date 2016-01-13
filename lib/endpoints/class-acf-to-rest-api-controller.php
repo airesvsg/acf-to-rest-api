@@ -77,38 +77,36 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 		}
 
 		public function rest_insert( $object, $request, $creating ) {
+			if ( $request instanceof WP_REST_Request && ! $this->get_id( $request ) && $this->format_id( $object ) ) {
+				$request->set_param( 'id', $this->id );
+			}
+
 			return $this->update_item( $request );
 		}
 
 		public function prepare_item_for_database( $request ) {
 			$item = false;
-			$key  = apply_filters( 'acf/rest_api/key', 'fields', $request, $this->type );
-			
-			if ( is_string( $key ) && ! empty( $key ) ) {
-				$data = $request->get_param( $key );
-				$this->format_id( $request );
-				if ( $this->id && is_array( $data ) ) {
-					$fields = get_field_objects( $this->id );
+
+			if ( $request instanceof WP_REST_Request ) {
+				$key  = apply_filters( 'acf/rest_api/key', 'fields', $request, $this->type );
+
+				if ( is_string( $key ) && ! empty( $key ) ) {
+					$data = $request->get_param( $key );
 					
-					if ( ! $fields ) {
-						if ( function_exists( 'get_field_object' ) ) {
-							foreach ( array_keys( $data ) as $selector ) {
-								$field = get_field_object( $selector, $this->id, array( 'load_value' => true ) );
-								if ( $field ) {
-									$fields[$selector] = $field;
-								}
-							}							
+					$this->format_id( $request );
+
+					if ( $this->id && is_array( $data ) ) {
+						$fields = $this->get_field_objects( $this->id );
+
+						if ( $fields ) {
+							$item = array(
+								'id'     => $this->id,
+								'fields' => $fields,
+								'data'   => $data,
+							);
 						}
 					}
-
-					if ( $fields ) {
-						$item = array(
-							'id'     => $this->id,
-							'fields' => $fields,
-							'data'   => $data,
-						);
-					}
-				}
+				}				
 			}
 
 			return apply_filters( "acf/rest_api/{$this->type}/prepare_item", $item, $request );
@@ -199,6 +197,63 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 			}
 
 			return apply_filters( "acf/rest_api/{$this->type}/get_fields", $data, $request, $response, $object );
+		}
+
+		protected function get_field_objects( $id ) {
+			if ( empty( $id ) ) {
+				return false;
+			}
+
+			$fields = get_field_objects( $id );
+			
+			if ( ! $fields ) {
+				$fields = array();
+				$fields_tmp = array();
+
+				if ( function_exists( 'acf_get_field_groups' ) && function_exists( 'acf_get_fields' ) && function_exists( 'acf_extract_var' ) ) {
+					$field_groups = acf_get_field_groups( array( 'post_id' => $id ) );
+
+					if ( ! empty( $field_groups ) ) {
+						foreach ( $field_groups as $field_group ) {							
+							$field_group_fields = acf_get_fields( $field_group );
+							if ( ! empty( $field_group_fields ) ) {
+								foreach( array_keys( $field_group_fields ) as $i ) {
+									$fields_tmp[] = acf_extract_var( $field_group_fields, $i );
+								}								
+							}
+						}
+					}
+				} else {
+					if ( strpos( $id, 'user_' ) !== false ) {
+						$filter = array( 'ef_user' => str_replace( 'user_', '', $id ) );
+					} elseif ( strpos( $id, 'taxonomy_' ) !== false ) {
+						$filter = array( 'ef_taxonomy' => str_replace( 'taxonomy_', '', $id ) );
+					} else {
+						$filter = array( 'post_id' => $id );
+					}
+
+					$field_groups = apply_filters( 'acf/location/match_field_groups', array(), $filter );
+					$acfs = apply_filters( 'acf/get_field_groups', array() );
+
+					if ( is_array( $acfs ) && is_array( $field_groups ) ) {
+						foreach( $acfs as $acf ) {
+							if ( in_array( $acf['id'], $field_groups ) ) {
+								$fields_tmp = array_merge( $fields_tmp, apply_filters( 'acf/field_group/get_fields', array(), $acf['id'] ) );
+							}
+						}
+					}
+				}
+
+				if ( is_array( $fields_tmp ) ) {
+					foreach( $fields_tmp as $field ) {
+						if ( isset( $field['name'] ) ) {
+							$fields[$field['name']] = $field;
+						}
+					}
+				}
+			}
+
+			return $fields;
 		}
 
 	}
