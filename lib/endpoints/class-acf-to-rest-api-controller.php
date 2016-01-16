@@ -18,7 +18,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 		public function register_hooks() {
 			if ( $this->type ) {
 				add_filter( "rest_prepare_{$this->type}", array( $this, 'rest_prepare' ), 10, 3 );
-				add_action( "rest_insert_{$this->type}", array( $this, 'rest_insert' ), 10, 3 );				
+				add_action( "rest_insert_{$this->type}", array( $this, 'rest_insert' ), 10, 3 );
 			}
 		}
 
@@ -98,7 +98,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 					if ( $this->id && is_array( $data ) ) {
 						$fields = $this->get_field_objects( $this->id );
 
-						if ( $fields ) {
+						if ( is_array( $fields ) && ! empty( $fields ) ) {
 							$item = array(
 								'id'     => $this->id,
 								'fields' => $fields,
@@ -106,7 +106,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 							);
 						}
 					}
-				}				
+				}
 			}
 
 			return apply_filters( "acf/rest_api/{$this->type}/prepare_item", $item, $request );
@@ -204,51 +204,51 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 				return false;
 			}
 
-			$fields = get_field_objects( $id );
-			
-			if ( ! $fields ) {
-				$fields = array();
-				$fields_tmp = array();
+			$fields     = array();
+			$fields_tmp = array();
 
-				if ( function_exists( 'acf_get_field_groups' ) && function_exists( 'acf_get_fields' ) && function_exists( 'acf_extract_var' ) ) {
-					$field_groups = acf_get_field_groups( array( 'post_id' => $id ) );
+			if ( function_exists( 'acf_get_field_groups' ) && function_exists( 'acf_get_fields' ) && function_exists( 'acf_extract_var' ) ) {
+				
+				$field_groups = acf_get_field_groups( array( 'post_id' => $id ) );
 
-					if ( ! empty( $field_groups ) ) {
-						foreach ( $field_groups as $field_group ) {							
-							$field_group_fields = acf_get_fields( $field_group );
-							if ( ! empty( $field_group_fields ) ) {
-								foreach( array_keys( $field_group_fields ) as $i ) {
-									$fields_tmp[] = acf_extract_var( $field_group_fields, $i );
-								}								
-							}
-						}
-					}
-				} else {
-					if ( strpos( $id, 'user_' ) !== false ) {
-						$filter = array( 'ef_user' => str_replace( 'user_', '', $id ) );
-					} elseif ( strpos( $id, 'taxonomy_' ) !== false ) {
-						$filter = array( 'ef_taxonomy' => str_replace( 'taxonomy_', '', $id ) );
-					} else {
-						$filter = array( 'post_id' => $id );
-					}
-
-					$field_groups = apply_filters( 'acf/location/match_field_groups', array(), $filter );
-					$acfs = apply_filters( 'acf/get_field_groups', array() );
-
-					if ( is_array( $acfs ) && is_array( $field_groups ) ) {
-						foreach( $acfs as $acf ) {
-							if ( in_array( $acf['id'], $field_groups ) ) {
-								$fields_tmp = array_merge( $fields_tmp, apply_filters( 'acf/field_group/get_fields', array(), $acf['id'] ) );
+				if ( is_array( $field_groups ) && ! empty( $field_groups ) ) {
+					foreach ( $field_groups as $field_group ) {
+						$field_group_fields = acf_get_fields( $field_group );
+						if ( is_array( $field_group_fields ) && ! empty( $field_group_fields ) ) {
+							foreach( array_keys( $field_group_fields ) as $i ) {
+								$fields_tmp[] = acf_extract_var( $field_group_fields, $i );
 							}
 						}
 					}
 				}
 
-				if ( is_array( $fields_tmp ) ) {
-					foreach( $fields_tmp as $field ) {
-						if ( isset( $field['name'] ) ) {
-							$fields[$field['name']] = $field;
+			} else {
+
+				if ( strpos( $id, 'user_' ) !== false ) {
+					$filter = array( 'ef_user' => str_replace( 'user_', '', $id ) );
+				} elseif ( strpos( $id, 'taxonomy_' ) !== false ) {
+					$filter = array( 'ef_taxonomy' => str_replace( 'taxonomy_', '', $id ) );
+				} else {
+					$filter = array( 'post_id' => $id );
+				}
+
+				$field_groups = apply_filters( 'acf/location/match_field_groups', array(), $filter );
+				$acfs = apply_filters( 'acf/get_field_groups', array() );
+
+				if ( is_array( $acfs ) && ! empty( $acfs ) && is_array( $field_groups ) && ! empty( $field_groups ) ) {
+					foreach( $acfs as $acf ) {
+						if ( in_array( $acf['id'], $field_groups ) ) {
+							$fields_tmp = array_merge( $fields_tmp, apply_filters( 'acf/field_group/get_fields', array(), $acf['id'] ) );
 						}
+					}
+				}
+
+			}
+
+			if ( is_array( $fields_tmp ) && ! empty( $fields_tmp ) ) {
+				foreach( $fields_tmp as $field ) {
+					if ( is_array( $field ) && isset( $field['name'] ) ) {
+						$fields[$field['name']] = $field;
 					}
 				}
 			}

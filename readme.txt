@@ -3,7 +3,7 @@ Contributors: airesvsg
 Tags: acf, api, rest, wp-api, wp-rest-api, json, wp, wordpress, wp-rest-api
 Requires at least: 4.3
 Tested up to: 4.4
-Stable tag: 2.0.3
+Stable tag: 2.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,6 +21,9 @@ http://github.com/airesvsg/acf-to-rest-api
 2. Activate the `ACF to REST API` plugin via the plugin admin page
 
 == Changelog ==
+
+= 2.0.4 =
+fixed error when you register new fields ( via php ) and try save them
 
 = 2.0.3 =
 error fixed when register a new post with acf fields
