@@ -60,10 +60,10 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 				foreach ( $item['data'] as $key => $value ) {
 					if ( isset( $item['fields'][$key]['key'] ) ) {
 						$field = $item['fields'][$key];
-						if ( function_exists( 'acf_update_value' ) ) {
-							acf_update_value( $value, $item['id'], $field );
-						} elseif ( function_exists( 'update_field' ) ) {
+						if ( function_exists( 'update_field' ) ) {
 							update_field( $field['key'], $value, $item['id'] );
+						} elseif ( function_exists( 'acf_update_value' ) ) {
+							acf_update_value( $value, $item['id'], $field );
 						} else {
 							do_action( 'acf/update_value', $value, $item['id'], $field );
 						}
