@@ -4,7 +4,7 @@
  * Description: Edit, Get and Puts ACF fields in WordPress REST API.
  * Author: Aires Gonçalves
  * Author URI: http://github.com/airesvsg
- * Version: 2.0.4
+ * Version: 2.0.5
  * Plugin URI: http://github.com/airesvsg/acf-to-rest-api
  */
 
@@ -16,7 +16,7 @@ if ( ! class_exists( 'ACF_To_REST_API' ) ) {
 
 	class ACF_To_REST_API {
 
-		const VERSION = '2.0.4';
+		const VERSION = '2.0.5';
 
 		public static function init() {
 			self::includes();
@@ -81,11 +81,11 @@ if ( ! class_exists( 'ACF_To_REST_API' ) ) {
 			}
 
 			if ( 'rest-api' == $plugin ) {
-				return is_plugin_active( 'rest-api/plugin.php' );				
+				return class_exists( 'WP_REST_Controller' );
 			} elseif ( 'acf' == $plugin ) {
-				return is_plugin_active( 'advanced-custom-fields/acf.php' ) || is_plugin_active( 'advanced-custom-fields-pro/acf.php' ) || is_plugin_active( 'acf-pro/acf.php' );
+				return class_exists( 'acf' );
 			} elseif ( 'all' == $plugin ) {
-				return self::is_plugin_active( 'rest-api' ) && self::is_plugin_active( 'acf' );
+				return class_exists( 'WP_REST_Controller' ) && class_exists( 'acf' );
 			}
 
 			return false;
@@ -105,9 +105,9 @@ if ( ! class_exists( 'ACF_To_REST_API' ) ) {
 
 			if ( $paths ) {
 				$plugins = get_plugins();
-				if ( $plugins ) {
+				if ( is_array( $plugins ) && count( $plugins ) > 0 ) {
 					foreach ( $paths as $path ) {
-						if ( ! empty( $plugins[$path] ) ) {
+						if ( isset( $plugins[$path] ) && ! empty( $plugins[$path] ) ) {
 							return $path;
 						}
 					}					

@@ -2,6 +2,12 @@ ACF to REST API
 ====
 Edit, Get and Puts [ACF](https://wordpress.org/plugins/advanced-custom-fields/) data into [WordPress REST API ( WP-API )](https://wordpress.org/plugins/rest-api/)
 
+- [Installation](#installation)
+- [Endpoints](#endpoints)
+- [Filters](#filters)
+- [Editing the fields](#editing-the-fields)
+- [Example](#example)
+
 Installation
 ====
 1. Copy the `acf-to-rest-api` folder into your `wp-content/plugins` folder
@@ -101,3 +107,9 @@ Now, the fields should be sent into the key `acf_fields`
 	<button type="submit">Save</button>
 </form>
 ```
+
+Example
+====
+Sample theme to edit the ACF Fields.
+
+https://github.com/airesvsg/acf-to-rest-api-example
