@@ -77,7 +77,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 		}
 
 		public function rest_insert( $object, $request, $creating ) {
-			if ( $request instanceof WP_REST_Request && ! $this->get_id( $request ) && $this->format_id( $object ) ) {
+			if ( $request instanceof WP_REST_Request && ! $this->get_id( $request ) && $this->get_id( $object ) ) {
 				$request->set_param( 'id', $this->id );
 			}
 

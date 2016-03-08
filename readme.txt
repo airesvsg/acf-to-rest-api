@@ -3,7 +3,7 @@ Contributors: airesvsg
 Tags: acf, api, rest, wp-api, wp-rest-api, json, wp, wordpress, wp-rest-api
 Requires at least: 4.3
 Tested up to: 4.4
-Stable tag: 2.0.6
+Stable tag: 2.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,6 +21,9 @@ http://github.com/airesvsg/acf-to-rest-api
 2. Activate the `ACF to REST API` plugin via the plugin admin page
 
 == Changelog ==
+
+= 2.0.7 =
+bugfix when create a new item
 
 = 2.0.6 =
 removing unnecessary code

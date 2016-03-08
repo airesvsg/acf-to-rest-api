@@ -4,7 +4,7 @@
  * Description: Edit, Get and Puts ACF fields in WordPress REST API.
  * Author: Aires Gonçalves
  * Author URI: http://github.com/airesvsg
- * Version: 2.0.6
+ * Version: 2.0.7
  * Plugin URI: http://github.com/airesvsg/acf-to-rest-api
  */
 
@@ -16,7 +16,7 @@ if ( ! class_exists( 'ACF_To_REST_API' ) ) {
 
 	class ACF_To_REST_API {
 
-		const VERSION = '2.0.6';
+		const VERSION = '2.0.7';
 
 		public static function init() {
 			self::includes();
