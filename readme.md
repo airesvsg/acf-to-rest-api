@@ -38,6 +38,7 @@ Filters
 | acf/rest_api/key | string **$key**<br>WP_REST_Request **$request**<br>string **$type** |
 | acf/rest_api/item_permissions/get | boolean **$permission**<br>WP_REST_Request **$request**<br>string **$type** |
 | acf/rest_api/item_permissions/update | boolean **$permission**<br>WP_REST_Request **$request**<br>string **$type** |
+| acf/rest_api/default_rest_base | boolean **$default**<br>string **$type** |
 | acf/rest_api/**{type}**/prepare_item | mixed ( array, boolean ) **$item**<br>WP_REST_Request **$request** |
 | acf/rest_api/**{type}**/get_fields | mixed ( array, WP_REST_Request ) **$data**<br>mixed ( WP_REST_Request, NULL ) **$request**<br>mixed ( WP_REST_Response, NULL ) **$response**<br>mixed ( WP_Post, WP_Term, WP_User, NULL ) **$object** |
 

@@ -14,6 +14,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 		public function __construct( $type ) {
 			$this->type = apply_filters( 'acf/rest_api/type', $type );
 			$this->namespace = 'acf/v2';
+			$this->rest_base = $this->get_rest_base( $this->type );
 		}
 
 		public function register_hooks() {
@@ -24,7 +25,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 		}
 
 		public function register_routes() {
-			register_rest_route( $this->namespace, '/' . $this->type . '/(?P<id>[\d]+)', array(
+			register_rest_route( $this->namespace, '/' . $this->rest_base . '/(?P<id>[\d]+)', array(
 				array(
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_item' ),
@@ -36,6 +37,18 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 					'permission_callback' => array( $this, 'update_item_permissions_check' ),
 				),
 			) );
+		}
+
+		protected function get_rest_base( $type ) {
+			global $wp_post_types;
+			
+			$default = apply_filters( 'acf/rest_api/default_rest_base', ! in_array( $type, array( 'post', 'page' ) ), $type );
+
+			if ( $default && isset( $wp_post_types[$type] ) && isset( $wp_post_types[$type]->rest_base ) ) {
+				return $wp_post_types[$type]->rest_base;
+			}
+
+			return $type;
 		}
 
 		public function get_item( $request ) {
