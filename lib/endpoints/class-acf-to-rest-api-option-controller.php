@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'ACF_To_REST_API_Option_Controller' ) ) {
 	class ACF_To_REST_API_Option_Controller extends ACF_To_REST_API_Controller {
 		public function register_routes() {
-			register_rest_route( 'acf/v2', "/options/?", array(
+			register_rest_route( $this->namespace, "/options/?", array(
 				array(
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_item' ),
@@ -20,7 +20,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Option_Controller' ) ) {
 				),
 			) );
 
-			register_rest_route( 'acf/v2', "/options/(?P<name>[\w\-\_]+)/?", array(
+			register_rest_route( $this->namespace, "/options/(?P<name>[\w\-\_]+)/?", array(
 				array(
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_item' ),

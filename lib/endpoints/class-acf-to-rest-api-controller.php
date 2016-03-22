@@ -13,6 +13,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 
 		public function __construct( $type ) {
 			$this->type = apply_filters( 'acf/rest_api/type', $type );
+			$this->namespace = 'acf/v2';
 		}
 
 		public function register_hooks() {
@@ -23,7 +24,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 		}
 
 		public function register_routes() {
-			register_rest_route( 'acf/v2', "/{$this->type}/(?P<id>\d+)/?", array(
+			register_rest_route( $this->namespace, "/{$this->type}/(?P<id>\d+)/?", array(
 				array(
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_item' ),
