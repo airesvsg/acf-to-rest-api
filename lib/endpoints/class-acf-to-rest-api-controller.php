@@ -18,13 +18,13 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 
 		public function register_hooks() {
 			if ( $this->type ) {
-				add_filter( "rest_prepare_{$this->type}", array( $this, 'rest_prepare' ), 10, 3 );
-				add_action( "rest_insert_{$this->type}", array( $this, 'rest_insert' ), 10, 3 );
+				add_filter( 'rest_prepare_' . $this->type, array( $this, 'rest_prepare' ), 10, 3 );
+				add_action( 'rest_insert_' . $this->type, array( $this, 'rest_insert' ), 10, 3 );
 			}
 		}
 
 		public function register_routes() {
-			register_rest_route( $this->namespace, "/{$this->type}/(?P<id>[\d]+)", array(
+			register_rest_route( $this->namespace, '/' . $this->type . '/(?P<id>[\d]+)', array(
 				array(
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_item' ),
@@ -43,7 +43,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 		}
 
 		public function get_item_permissions_check( $request ) {
-			return apply_filters( "acf/rest_api/item_permissions/get", true, $request, $this->type );
+			return apply_filters( 'acf/rest_api/item_permissions/get', true, $request, $this->type );
 		}
 		
 		public function rest_prepare( $response, $post, $request ) {
@@ -51,7 +51,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 		}
 		
 		public function update_item_permissions_check( $request ) {
-			return apply_filters( "acf/rest_api/item_permissions/update", current_user_can( 'edit_posts' ), $request, $this->type );
+			return apply_filters( 'acf/rest_api/item_permissions/update', current_user_can( 'edit_posts' ), $request, $this->type );
 		}
 
 		public function update_item( $request ) {
@@ -74,7 +74,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 				return new WP_REST_Response( $this->get_fields( $request ), 200 );
 			}
 			
-			return new WP_Error( 'cant_update_item', __( "Cannot update item", 'acf-to-rest-api' ), array( 'status' => 500 ) );
+			return new WP_Error( 'cant_update_item', __( 'Cannot update item', 'acf-to-rest-api' ), array( 'status' => 500 ) );
 		}
 
 		public function rest_insert( $object, $request, $creating ) {
@@ -110,7 +110,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 				}
 			}
 
-			return apply_filters( "acf/rest_api/{$this->type}/prepare_item", $item, $request );
+			return apply_filters( 'acf/rest_api/' . $this->type . '/prepare_item', $item, $request );
 		}
 
 		protected function get_id( $object ) {
@@ -197,7 +197,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 				$data = $response;
 			}
 
-			return apply_filters( "acf/rest_api/{$this->type}/get_fields", $data, $request, $response, $object );
+			return apply_filters( 'acf/rest_api/' . $this->type . '/get_fields', $data, $request, $response, $object );
 		}
 
 		protected function get_field_objects( $id ) {

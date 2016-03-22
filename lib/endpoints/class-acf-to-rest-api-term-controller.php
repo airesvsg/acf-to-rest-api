@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'ACF_To_REST_API_Term_Controller' ) ) {
 	class ACF_To_REST_API_Term_Controller extends ACF_To_REST_API_Controller {
 		public function register_routes() {
-			register_rest_route( $this->namespace, "/{$this->type}/(?P<taxonomy>[\w\-\_]+)/(?P<id>[\d]+)", array(
+			register_rest_route( $this->namespace, '/' . $this->type . '/(?P<taxonomy>[\w\-\_]+)/(?P<id>[\d]+)', array(
 				array(
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_item' ),
