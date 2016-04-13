@@ -52,7 +52,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Term_Controller' ) ) {
 		protected function show( $object ) {
 			global $wp_taxonomies;
 			
-			$taxonomy = $this->get_rest_base( $request );
+			$taxonomy = $this->get_rest_base( $object );
 			
 			return $taxonomy && isset( $wp_taxonomies[$taxonomy]->show_in_rest ) && $wp_taxonomies[$taxonomy]->show_in_rest;
 		}
