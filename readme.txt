@@ -2,7 +2,7 @@
 Contributors: airesvsg
 Tags: acf, api, rest, wp-api, wp-rest-api, json, wp, wordpress, wp-rest-api
 Requires at least: 4.3
-Tested up to: 4.4
+Tested up to: 4.5
 Stable tag: 2.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
