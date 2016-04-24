@@ -1,20 +1,19 @@
 === ACF to REST API ===
 Contributors: airesvsg
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=airesvsg%40gmail%2ecom&lc=BR&item_name=Aires%20Goncalves&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest
 Tags: acf, api, rest, wp-api, wp-rest-api, json, wp, wordpress, wp-rest-api
 Requires at least: 4.3
 Tested up to: 4.5
-Stable tag: 2.1.1
+Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Edit, Get and Puts ACF data into the WordPress REST API ( WP-API | WP REST API ).
+Exposes Advanced Custom Fields Endpoints in the WP REST API v2
 
 == Description ==
-Edit, Get and Puts [ACF](https://wordpress.org/plugins/advanced-custom-fields/) data into the [WordPress REST API](https://wordpress.org/plugins/rest-api/) ( WP-API | WP REST API ).
+Exposes [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/) Endpoints in the [WP REST API v2](https://wordpress.org/plugins/rest-api/)
 
-**See details on GitHub**
-
-http://github.com/airesvsg/acf-to-rest-api
+**See details on GitHub:** http://github.com/airesvsg/acf-to-rest-api
 
 == Installation ==
 1. Copy the `acf-to-rest-api` folder into your `wp-content/plugins` folder
@@ -22,11 +21,15 @@ http://github.com/airesvsg/acf-to-rest-api
 
 == Changelog ==
 
+= 2.2.0 =
+get specific field via endpoints
+
 = 2.1.1 =
 bugfix term endpoint
 
 = 2.1.0 =
 adding rest base support
+
 adding new filter acf/rest_api/default_rest_base
 
 = 2.0.7 =
@@ -52,6 +55,7 @@ Bugfix strict standards
 
 = 2.0.0 =
 New version of the plugin ACF to WP REST API
+
 Changing name ACF to WP REST API > ACF to REST API
 
 == Upgrade Notice ==

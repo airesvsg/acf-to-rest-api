@@ -1,6 +1,8 @@
 ACF to REST API
 ====
-Edit, Get and Puts [ACF](https://wordpress.org/plugins/advanced-custom-fields/) data into [WordPress REST API ( WP-API )](https://wordpress.org/plugins/rest-api/)
+Exposes [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/) Endpoints in the [WP REST API v2](https://wordpress.org/plugins/rest-api/)
+
+https://wordpress.org/plugins/acf-to-rest-api/
 
 - [Installation](#installation)
 - [Endpoints](#endpoints)
@@ -19,14 +21,21 @@ Endpoints
 | Endpoint | READABLE | EDITABLE |
 |----------|:--------:|:--------:|
 | /wp-json/acf/v2/post/**{id}** | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) |
+| /wp-json/acf/v2/post/**{id}**/**{field_name}** | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) |
 | /wp-json/acf/v2/page/**{id}** | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) |
+| /wp-json/acf/v2/page/**{id}**/**{field_name}** | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) |
 | /wp-json/acf/v2/user/**{id}** | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) |
+| /wp-json/acf/v2/user/**{id}**/**{field_name}** | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) |
 | /wp-json/acf/v2/term/**{taxonomy}**/**{id}** | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) |
+| /wp-json/acf/v2/term/**{taxonomy}**/**{id}**/**{field_name}** | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) |
 | /wp-json/acf/v2/comment/**{id}** | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) |
+| /wp-json/acf/v2/comment/**{id}**/**{field_name}** | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) |
 | /wp-json/acf/v2/media/**{id}** | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) |
+| /wp-json/acf/v2/media/**{id}**/**{field_name}** | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) |
 | /wp-json/acf/v2/**{post-type}**/**{id}** | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) |
+| /wp-json/acf/v2/**{post-type}**/**{id}**/**{field_name}** | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) |
 | /wp-json/acf/v2/options | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) |
-| /wp-json/acf/v2/options/**{name}** | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) |
+| /wp-json/acf/v2/options/**{field_name}** | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) | ![yes](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/yes.png) |
 
 Filters
 ====

@@ -25,7 +25,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 		}
 
 		public function register_routes() {
-			register_rest_route( $this->namespace, '/' . $this->rest_base . '/(?P<id>[\d]+)', array(
+			register_rest_route( $this->namespace, '/' . $this->rest_base . '/(?P<id>[\d]+)/?(?P<field>[\w\-\_]+)?', array(
 				array(
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_item' ),
@@ -105,14 +105,19 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 				$key  = apply_filters( 'acf/rest_api/key', 'fields', $request, $this->type );
 
 				if ( is_string( $key ) && ! empty( $key ) ) {
-					$data = $request->get_param( $key );
-					
+					$data  = $request->get_param( $key );
+					$field = $request->get_param( 'field' );
+
 					$this->format_id( $request );
 
 					if ( $this->id && is_array( $data ) ) {
 						$fields = $this->get_field_objects( $this->id );
 
 						if ( is_array( $fields ) && ! empty( $fields ) ) {
+							if ( $field && isset( $data[$field] ) ) {
+								$data = array( $field => $data[$field] );
+							}
+
 							$item = array(
 								'id'     => $this->id,
 								'fields' => $fields,
@@ -182,9 +187,14 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 		}
 
 		protected function get_fields( $request, $response = null, $object = null ) {
-			$data = array();
-			$swap = $response instanceof WP_REST_Response;
+			$data  = array();
+			$field = null;
+			$swap  = $response instanceof WP_REST_Response;
 
+			if ( $request instanceof WP_REST_Request ) {
+				$field = $request->get_param( 'field' );
+			}
+			
 			if ( $swap ) {
 				$data = $response->get_data();
 			}
@@ -200,7 +210,11 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 			$this->format_id( $object );
 
 			if ( $this->id ) {
-				$data['acf'] = get_fields( $this->id );
+				if ( $field ) {
+					$data = array( $field => get_field( $field, $this->id ) );
+				} else {
+					$data['acf'] = get_fields( $this->id );
+				}
 			} else {
 				$data['acf'] = array();
 			}
@@ -221,8 +235,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 			$fields     = array();
 			$fields_tmp = array();
 
-			if ( function_exists( 'acf_get_field_groups' ) && function_exists( 'acf_get_fields' ) && function_exists( 'acf_extract_var' ) ) {
-				
+			if ( function_exists( 'acf_get_field_groups' ) && function_exists( 'acf_get_fields' ) && function_exists( 'acf_extract_var' ) ) {				
 				$field_groups = acf_get_field_groups( array( 'post_id' => $id ) );
 
 				if ( is_array( $field_groups ) && ! empty( $field_groups ) ) {
@@ -235,9 +248,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 						}
 					}
 				}
-
 			} else {
-
 				if ( strpos( $id, 'user_' ) !== false ) {
 					$filter = array( 'ef_user' => str_replace( 'user_', '', $id ) );
 				} elseif ( strpos( $id, 'taxonomy_' ) !== false ) {
@@ -256,7 +267,6 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 						}
 					}
 				}
-
 			}
 
 			if ( is_array( $fields_tmp ) && ! empty( $fields_tmp ) ) {

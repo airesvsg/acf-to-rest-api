@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name: ACF to REST API
- * Description: Edit, Get and Puts ACF fields in WordPress REST API.
+ * Description: Exposes Advanced Custom Fields Endpoints in the WP REST API v2
  * Author: Aires Gonçalves
  * Author URI: http://github.com/airesvsg
- * Version: 2.1.1
+ * Version: 2.2.0
  * Plugin URI: http://github.com/airesvsg/acf-to-rest-api
  */
 
@@ -16,7 +16,7 @@ if ( ! class_exists( 'ACF_To_REST_API' ) ) {
 
 	class ACF_To_REST_API {
 
-		const VERSION = '2.1.1';
+		const VERSION = '2.2.0';
 
 		public static function init() {
 			self::includes();
