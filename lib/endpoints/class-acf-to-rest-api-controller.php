@@ -179,11 +179,13 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 					$this->id = $taxonomy . '_' . $this->id;
 					break;
 				case 'option' :
-					$this->id = 'option';
+					$this->id = 'options';
 					break;
 			}
-		
-			return apply_filters( 'acf/rest_api/id', $this->id );
+			
+			$this->id = apply_filters( 'acf/rest_api/id', $this->id );
+
+			return $this->id;
 		}
 
 		protected function get_fields( $request, $response = null, $object = null ) {
