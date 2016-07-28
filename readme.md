@@ -9,6 +9,7 @@ https://wordpress.org/plugins/acf-to-rest-api/
 - [Filters](#filters)
 - [Editing the fields](#editing-the-fields)
 - [Example](#example)
+- [Cache](#cache)
 
 Installation
 ====
@@ -123,3 +124,9 @@ Example
 Sample theme to edit the ACF Fields.
 
 https://github.com/airesvsg/acf-to-rest-api-example
+
+Cache
+====
+Enable caching for WordPress REST API and increase speed of your application.
+
+https://github.com/airesvsg/wp-rest-api-cache
