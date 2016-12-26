@@ -74,6 +74,19 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 				foreach ( $item['data'] as $key => $value ) {
 					if ( isset( $item['fields'][$key]['key'] ) ) {
 						$field = $item['fields'][$key];
+						$type = $field['type'];
+						
+						if($type == "true_false") {
+							switch ($value) {
+							    case "true":
+							        $value = 1;
+							        break;
+							    case "false":
+							        $value = 0;
+							        break;
+							}
+						}
+
 						if ( function_exists( 'acf_update_value' ) ) {
 							acf_update_value( $value, $item['id'], $field );
 						} elseif ( function_exists( 'update_field' ) ) {
