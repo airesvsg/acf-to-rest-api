@@ -220,11 +220,9 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 				}
 			}
 
-			foreach( $acf_data as $k => $rel_array ) {
-				if ( is_array($rel_array) )
-				{
-					foreach( $rel_array as $index => $rel_content )
-					{
+			foreach ( $acf_data as $k => $rel_array ) {
+				if ( is_array( $rel_array ) ) {
+					foreach ( $rel_array as $index => $rel_content ) {
 						$sub_acf_data = get_fields( $rel_content->ID );
 
 						if ( $field ) {
