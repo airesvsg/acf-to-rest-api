@@ -211,14 +211,35 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 
 			$this->format_id( $object );
 
+			$acf_data = array();
 			if ( $this->id ) {
 				if ( $field ) {
-					$data = array( $field => get_field( $field, $this->id ) );
+					$acf_data = get_field( $field, $this->id );
 				} else {
-					$data['acf'] = get_fields( $this->id );
+					$acf_data = get_fields( $this->id );
 				}
+			}
+
+			foreach( $acf_data as $k => $rel_array ) {
+				if ( is_array($rel_array) )
+				{
+					foreach( $rel_array as $index => $rel_content )
+					{
+						$sub_acf_data = get_fields( $rel_content->ID );
+
+						if ( $field ) {
+							$rel_content->$field = $sub_acf_data;
+						} else {
+							$rel_content->acf = $sub_acf_data;
+						}
+					}
+				}
+			}
+
+			if ( $field ) {
+				$data[ $field ] = $acf_data;
 			} else {
-				$data['acf'] = array();
+				$data['acf'] = $acf_data;
 			}
 			
 			if ( $swap ) {
