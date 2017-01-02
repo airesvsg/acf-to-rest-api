@@ -182,7 +182,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 					$this->id = 'options';
 					break;
 			}
-			
+
 			$this->id = apply_filters( 'acf/rest_api/id', $this->id );
 
 			return $this->id;
@@ -196,7 +196,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 			if ( $request instanceof WP_REST_Request ) {
 				$field = $request->get_param( 'field' );
 			}
-			
+
 			if ( $swap ) {
 				$data = $response->get_data();
 			}
@@ -211,22 +211,47 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 
 			$this->format_id( $object );
 
+			$acf_data = array();
 			if ( $this->id ) {
 				if ( $field ) {
-					$data = array( $field => get_field( $field, $this->id ) );
+					$acf_data = get_field( $field, $this->id );
 				} else {
-					$data['acf'] = get_fields( $this->id );
+					$acf_data = get_fields( $this->id );
 				}
-			} else {
-				$data['acf'] = array();
 			}
-			
+
+			$this->add_relation_fields( $acf_data, $field );
+
+			if ( $field ) {
+				$data[ $field ] = $acf_data;
+			} else {
+				$data['acf'] = $acf_data;
+			}
+
 			if ( $swap ) {
 				$response->data = $data;
 				$data = $response;
 			}
 
 			return apply_filters( 'acf/rest_api/' . $this->type . '/get_fields', $data, $request, $response, $object );
+		}
+
+		protected function add_relation_fields( &$acf_data, $field ) {
+			foreach ( $acf_data as $k => $rel_array ) {
+				if ( is_array( $rel_array ) ) {
+					foreach ( $rel_array as $index => $rel_content ) {
+						$sub_acf_data = get_fields( $rel_content->ID );
+
+						$this->add_relation_fields( $sub_acf_data, $field );
+
+						if ( $field ) {
+							$rel_content->$field = $sub_acf_data;
+						} else {
+							$rel_content->acf = $sub_acf_data;
+						}
+					}
+				}
+			}
 		}
 
 		protected function get_field_objects( $id ) {
