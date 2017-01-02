@@ -182,7 +182,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 					$this->id = 'options';
 					break;
 			}
-			
+
 			$this->id = apply_filters( 'acf/rest_api/id', $this->id );
 
 			return $this->id;
@@ -196,7 +196,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 			if ( $request instanceof WP_REST_Request ) {
 				$field = $request->get_param( 'field' );
 			}
-			
+
 			if ( $swap ) {
 				$data = $response->get_data();
 			}
