@@ -215,7 +215,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 				if ( $field ) {
 					$data = array( $field => get_field( $field, $this->id ) );
 				} else {
-					$data['acf'] = get_fields( $this->id );
+					$data['acf'] = get_fields( $object );
 				}
 			} else {
 				$data['acf'] = array();
