@@ -77,11 +77,11 @@ if ( ! class_exists( 'ACF_To_REST_API' ) ) {
 
 		public static function is_plugin_active( $plugin ) {
 			if ( 'rest-api' == $plugin ) {
-				return class_exists( 'WP_REST_Controller' );
+				return class_exists( 'WP_REST_Controller' ) || class_exists( 'WP_REST_Server' );
 			} elseif ( 'acf' == $plugin ) {
 				return class_exists( 'acf' );
 			} elseif ( 'all' == $plugin ) {
-				return class_exists( 'WP_REST_Controller' ) && class_exists( 'acf' );
+				return static::is_plugin_active( 'rest-api' ) && static::is_plugin_active( 'acf' );
 			}
 
 			return false;

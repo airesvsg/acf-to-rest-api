@@ -5,7 +5,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
-	class ACF_To_REST_API_Controller extends WP_REST_Controller {
+
+	if ( class_exists( 'WP_REST_Server' ) ) {
+		class ACF_To_REST_API_Base extends WP_REST_Server { }
+	} else {
+		class ACF_To_REST_API_Base extends WP_REST_Controller { }
+	}
+
+	class ACF_To_REST_API_Controller extends ACF_To_REST_API_Base {
 
 		protected $type;
 
