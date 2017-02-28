@@ -76,7 +76,7 @@ Deprecated filters
 | acf/rest_api/types | array **$types** |
 | acf/rest_api/default_rest_base | boolean **$default**<br>string **$type** |
 
-Request API version ![new](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/new-v3.1.png)
+Request API version
 ====
 See below how to select the Request API Version.
 
@@ -93,7 +93,7 @@ The other alternative is to define the constant `ACF_TO_REST_API_REQUEST_VERSION
 define( 'ACF_TO_REST_API_REQUEST_VERSION', 2 );
 ```
 
-Field Settings ![new](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/new-v3.1.png)
+Field Settings
 ====
 In this version is possible to configure the field options via admin.
 
