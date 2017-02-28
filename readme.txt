@@ -1,17 +1,17 @@
 === ACF to REST API ===
 Contributors: airesvsg
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=airesvsg%40gmail%2ecom&lc=BR&item_name=Aires%20Goncalves&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest
-Tags: acf, api, rest, wp-api, wp-rest-api, json, wp, wordpress, wp-rest-api
-Requires at least: 4.3
-Tested up to: 4.7
-Stable tag: 2.2.1
+Tags: acf, api, rest, wp-api, wp-rest-api, json, wp, wordpress, wp-rest-api, wordpress-rest-api
+Requires at least: 4.6
+Tested up to: 4.7.2
+Stable tag: 3.0.0-beta
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Exposes Advanced Custom Fields Endpoints in the WP REST API v2
+Exposes Advanced Custom Fields Endpoints in the WordPress REST API
 
 == Description ==
-Exposes [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/) Endpoints in the [WP REST API v2](https://wordpress.org/plugins/rest-api/)
+Exposes [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/) Endpoints in the [WordPress REST API](https://developer.wordpress.org/rest-api/)
 
 **See details on GitHub:** http://github.com/airesvsg/acf-to-rest-api
 
@@ -20,6 +20,15 @@ Exposes [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-f
 2. Activate the `ACF to REST API` plugin via the plugin admin page
 
 == Changelog ==
+
+= 3.0.0-beta =
+more readable endpoints ( https://github.com/airesvsg/acf-to-rest-api/issues/46 ) - Thanks to Imaginet
+change return when acf filed key is empty ( https://github.com/airesvsg/acf-to-rest-api/issues/48 ) - Thanks to Joris Verbogt
+multiple custom options pages ( https://github.com/airesvsg/acf-to-rest-api/issues/85 ) - Thanks to Alex Patton
+bugfix ACF key in taxonomy ( https://github.com/airesvsg/acf-to-rest-api/issues/43 ) - Thanks to Cesar Denis
+depreacted filter acf/rest_api/type
+depreacted filter acf/rest_api/types
+depreacted filter acf/rest_api/default_rest_base
 
 = 2.2.1 =
 bugfix options page id

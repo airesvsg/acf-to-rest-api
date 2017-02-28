@@ -17,7 +17,7 @@ if ( current_user_can( 'install_plugins' ) ) {
 	}
 } else {
 	$target = true;
-	$url    = 	'http://wordpress.org/plugins/rest-api/';
+	$url    = 'http://wordpress.org/plugins/rest-api/';
 }
 
 ?>

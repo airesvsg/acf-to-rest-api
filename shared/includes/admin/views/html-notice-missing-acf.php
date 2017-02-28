@@ -17,7 +17,7 @@ if ( current_user_can( 'install_plugins' ) ) {
 	}
 } else {
 	$target = true;
-	$url    = 	'http://wordpress.org/plugins/advanced-custom-fields/';
+	$url    = 'http://wordpress.org/plugins/advanced-custom-fields/';
 }
 
 ?>
