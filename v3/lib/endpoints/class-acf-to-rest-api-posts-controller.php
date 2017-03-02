@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'ACF_To_REST_API_Post_Types_Controller' ) ) {
+if ( ! class_exists( 'ACF_To_REST_API_Posts_Controller' ) ) {
 	class ACF_To_REST_API_Posts_Controller extends ACF_To_REST_API_Controller {
 		public function __construct( $type ) {
 			$this->type      = $type->name;
