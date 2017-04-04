@@ -174,7 +174,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 			if ( $request instanceof WP_REST_Request ) {
 				$params = $request->get_params();
 				foreach ( self::$default_params as $k => $v ) {
-					if ( ! in_array( $k, $params ) ) {
+					if ( ! isset( $params[ $k ] ) ) {
 						$request->set_param( $k, $v );
 					}
 				}
