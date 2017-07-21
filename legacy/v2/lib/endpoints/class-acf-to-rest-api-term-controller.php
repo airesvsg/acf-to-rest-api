@@ -6,6 +6,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'ACF_To_REST_API_Term_Controller' ) ) {
 	class ACF_To_REST_API_Term_Controller extends ACF_To_REST_API_Controller {
+
+		public function register_hooks() {
+			$this->register_taxonomy_routes();
+			parent::register_hooks();
+		}
+
+		public function register_taxonomy_routes() {
+			$taxonomies = get_taxonomies( [ 'show_in_rest' => true ] );
+			foreach ( $taxonomies as $taxonomy ) {
+				/**
+				 * Filters a term item returned from the API.
+				 *
+				 * The dynamic portion of the hook name, `taxonomy`, refers to the taxonomy slug.
+				 *
+				 * Allows modification of the term data right before it is returned.
+				 *
+				 * @since 3.0.1
+				 * @author Maxime CULEA
+				 *
+				 * @param \WP_REST_Response  $response  The response object.
+				 * @param object             $item      The original term object.
+				 * @param \WP_REST_Request   $request   Request used to generate the response.
+				 */
+				add_filter( 'rest_prepare_' . $taxonomy, array( $this, 'rest_prepare' ), 10, 3 );
+			}
+		}
+
 		public function register_routes() {
 			register_rest_route( $this->namespace, '/' . $this->type . '/(?P<taxonomy>[\w\-\_]+)/(?P<id>[\d]+)/?(?P<field>[\w\-\_]+)?', array(
 				array(
