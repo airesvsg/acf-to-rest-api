@@ -35,7 +35,7 @@ if ( ! class_exists( 'ACF_To_REST_API_ACF_Field_Settings' ) ) {
 					'name'          => 'edit_in_rest',
 					'ui'            => 1,
 					'class'         => 'field-edit_in_rest',
-					'default_value' => 1,
+					'default_value' => 0,
 				), true );
 			} else { ?>
 				<tr>
@@ -45,7 +45,7 @@ if ( ! class_exists( 'ACF_To_REST_API_ACF_Field_Settings' ) ) {
 					<td>
 					<?php
 					if ( ! isset( $field['edit_in_rest'] ) ) {
-						$field['edit_in_rest'] = 1;
+						$field['edit_in_rest'] = 0;
 					}
 					do_action( 'acf/create_field', array(
 						'type'          => 'radio',
@@ -72,7 +72,7 @@ if ( ! class_exists( 'ACF_To_REST_API_ACF_Field_Settings' ) ) {
 					'name'          => 'show_in_rest',
 					'ui'            => 1,
 					'class'         => 'field-show_in_rest',
-					'default_value' => 1,
+					'default_value' => 0,
 				), true );
 			} else { ?>
 				<tr>
@@ -82,7 +82,7 @@ if ( ! class_exists( 'ACF_To_REST_API_ACF_Field_Settings' ) ) {
 					<td>
 					<?php
 					if ( ! isset( $field['show_in_rest'] ) ) {
-						$field['show_in_rest'] = 1;
+						$field['show_in_rest'] = 0;
 					}
 					do_action( 'acf/create_field', array(
 						'type'          => 'radio',

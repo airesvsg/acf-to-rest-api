@@ -85,7 +85,8 @@ if ( ! class_exists( 'ACF_To_REST_API_ACF_API' ) ) {
 				} else {
 					$fields = get_fields( $this->id );
 					if ( ! $fields ) {
-						$fields = array();
+						$this->get_field_objects( $this->id );
+						$fields = $this->get_fields_fallback();
 					}
 					$data['acf'] = $fields;
 				}
@@ -96,7 +97,7 @@ if ( ! class_exists( 'ACF_To_REST_API_ACF_API' ) ) {
 					} else {
 						foreach ( array_keys( $data['acf'] ) as $key ) {
 							$this->show_in_rest( $data['acf'], $key, $this->field_objects );
-						}						
+						}
 					}
 				}
 			} else {
@@ -104,6 +105,20 @@ if ( ! class_exists( 'ACF_To_REST_API_ACF_API' ) ) {
 			}
 
 			return apply_filters( 'acf/rest_api/' . $this->type . '/get_fields', $data, $request );
+		}
+
+		protected function get_fields_fallback() {
+			$fields = array();
+
+			if ( ! empty( $this->field_objects ) ) {
+				foreach ( $this->field_objects as $obj ) {
+					if( isset( $obj['name'] ) && ! empty( $obj['name'] ) ) {
+						$fields[ $obj['name'] ] = get_field( $obj['name'], $this->id );
+					}
+				}
+			}
+
+			return $fields;
 		}
 
 		public function get_field_objects( $id ) {
