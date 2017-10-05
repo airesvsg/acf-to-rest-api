@@ -3,8 +3,8 @@ Contributors: airesvsg
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=airesvsg%40gmail%2ecom&lc=BR&item_name=Aires%20Goncalves&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest
 Tags: acf, api, rest, wp-api, wp-rest-api, json, wp, wordpress, wp-rest-api, wordpress-rest-api
 Requires at least: 4.6
-Tested up to: 4.7.2
-Stable tag: 3.0.1-beta
+Tested up to: 4.8.2
+Stable tag: 3.0.2-beta
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,6 +20,10 @@ Exposes [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-f
 2. Activate the `ACF to REST API` plugin via the plugin admin page
 
 == Changelog ==
+
+= 3.0.2-beta =
+adding fallback to get_fields
+changing default value to acf field setting
 
 = 3.0.1-beta =
 fix default params bug
