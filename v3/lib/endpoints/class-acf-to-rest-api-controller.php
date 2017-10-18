@@ -50,15 +50,17 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 
 		public function register_field() {
 			register_rest_field( $this->type, 'acf', array(
-				'get_callback' => function( $data ) {
-					$fields = $this->acf->get_fields( $data );
-					return $fields['acf'];
-				},
+				'get_callback' => array( $this, 'register_field_callback' ),
 				'schema' => array(
 					'description' => __( 'Expose advanced custom fields.', 'acf-to-rest-api' ),
 					'type'        => 'object',
 				),
 			) );
+		}
+
+		public function register_field_callback( $data ) {
+			$fields = $this->acf->get_fields( $data );
+			return $fields['acf'];
 		}
 
 		public function register() {

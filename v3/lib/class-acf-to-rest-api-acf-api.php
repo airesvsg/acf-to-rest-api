@@ -6,9 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'ACF_To_REST_API_ACF_API' ) ) {
 	class ACF_To_REST_API_ACF_API {
-		protected $id   = null;
-		protected $type = null;
-		protected $controller = null;
+		protected $id            = null;
+		protected $type          = null;
+		protected $controller    = null;
 		protected $field_objects = null;
 
 		public function __construct( $type, $controller = null ) {
@@ -16,7 +16,7 @@ if ( ! class_exists( 'ACF_To_REST_API_ACF_API' ) ) {
 			$this->controller = $controller;
 		}
 
-		protected function format_id( $object ) {
+		protected function format_id() {
 			if ( $this->id ) {
 				switch ( $this->type ) {
 					case 'comment' :
@@ -38,27 +38,27 @@ if ( ! class_exists( 'ACF_To_REST_API_ACF_API' ) ) {
 			return $this->id;
 		}
 
-		public function get_id( $obj ) {
+		public function get_id( $object ) {
 			$this->id = false;
 
-			if ( is_numeric( $obj ) ) {
-				$this->id = $obj;
-			} elseif ( is_array( $obj ) && isset( $obj['id'] ) ) {
-				$this->id = $obj['id'];
-			} elseif ( is_object( $obj ) ) {
-				if ( $obj instanceof WP_REST_Response ) {
-					$data = $obj->get_data();
+			if ( is_numeric( $object ) ) {
+				$this->id = $object;
+			} elseif ( is_array( $object ) && isset( $object['id'] ) ) {
+				$this->id = $object['id'];
+			} elseif ( is_object( $object ) ) {
+				if ( $object instanceof WP_REST_Response ) {
+					$data = $object->get_data();
 					if ( isset( $data['id'] ) ) {
 						$this->id = $data['id'];
 					}
-				} elseif ( $obj instanceof WP_REST_Request ) {
-					$this->id = $obj->get_param( 'id' );
-				} elseif ( isset( $obj->ID ) ) {
-					$this->id = $obj->ID;
-				} elseif ( isset( $obj->comment_ID ) ) {
-					$this->id = $obj->comment_ID;
-				} elseif ( isset( $obj->term_id ) ) {
-					$this->id = $obj->term_id;
+				} elseif ( $object instanceof WP_REST_Request ) {
+					$this->id = $object->get_param( 'id' );
+				} elseif ( isset( $object->ID ) ) {
+					$this->id = $object->ID;
+				} elseif ( isset( $object->comment_ID ) ) {
+					$this->id = $object->comment_ID;
+				} elseif ( isset( $object->term_id ) ) {
+					$this->id = $object->term_id;
 				}
 			}
 
@@ -68,7 +68,7 @@ if ( ! class_exists( 'ACF_To_REST_API_ACF_API' ) ) {
 				$this->id = absint( $this->id );
 			}
 
-			return $this->format_id( $this->id );
+			return $this->format_id();
 		}
 
 		public function get_fields( $request ) {
@@ -111,9 +111,9 @@ if ( ! class_exists( 'ACF_To_REST_API_ACF_API' ) ) {
 			$fields = array();
 
 			if ( ! empty( $this->field_objects ) ) {
-				foreach ( $this->field_objects as $obj ) {
-					if( isset( $obj['name'] ) && ! empty( $obj['name'] ) ) {
-						$fields[ $obj['name'] ] = get_field( $obj['name'], $this->id );
+				foreach ( $this->field_objects as $objects ) {
+					if( isset( $objects['name'] ) && ! empty( $objects['name'] ) ) {
+						$fields[ $objects['name'] ] = get_field( $objects['name'], $this->id );
 					}
 				}
 			}
