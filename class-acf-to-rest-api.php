@@ -26,6 +26,7 @@ if ( ! class_exists( 'ACF_To_REST_API' ) ) {
 
 		public static function init() {
 			self::includes();
+			do_action('acf_to_rest_api_init');
 			self::hooks();
 		}
 
