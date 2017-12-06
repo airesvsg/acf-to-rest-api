@@ -25,6 +25,7 @@ if ( ! class_exists( 'ACF_To_REST_API' ) ) {
 		private static $instance = null;
 
 		public static function init() {
+			do_action('acf_to_rest_api_custom_acf_loader');
 			self::includes();
 			self::hooks();
 		}
