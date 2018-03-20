@@ -65,7 +65,7 @@ if ( ! class_exists( 'ACF_To_REST_API_ACF_API' ) ) {
 			if ( 'option' == $this->type ) {
 				$this->id = sanitize_title( $this->id );
 			} else {
-				$this->id = absint( $this->id );
+				$this->id = preg_replace("/[^0-9]/", "", $this->id);
 			}
 
 			return $this->format_id();
@@ -74,7 +74,7 @@ if ( ! class_exists( 'ACF_To_REST_API_ACF_API' ) ) {
 		public function get_fields( $request ) {
 			$data  = array();
 			$field = null;
-			
+
 			if ( $request instanceof WP_REST_Request ) {
 				$field = $request->get_param( 'field' );
 			}
