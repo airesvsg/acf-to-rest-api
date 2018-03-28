@@ -130,7 +130,16 @@ if ( ! class_exists( 'ACF_To_REST_API_ACF_API' ) ) {
 			$fields_tmp = array();
 
 			if ( function_exists( 'acf_get_field_groups' ) && function_exists( 'acf_get_fields' ) && function_exists( 'acf_extract_var' ) ) {
-				$field_groups = acf_get_field_groups( array( 'post_id' => $id ) );
+
+				if ( strpos( $id, 'user_' ) !== false ) {
+					$filter = array( 'user_id' => str_replace( 'user_', '', $id ) );
+				} elseif ( strpos( $id, 'taxonomy_' ) !== false ) {
+					$filter = array( 'taxonomy' => str_replace( 'taxonomy_', '', $id ) );
+				} else {
+					$filter = array( 'post_id' => $id );
+				}
+
+				$field_groups = acf_get_field_groups( $filter );
 
 				if ( is_array( $field_groups ) && ! empty( $field_groups ) ) {
 					foreach ( $field_groups as $field_group ) {
