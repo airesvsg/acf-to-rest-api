@@ -178,7 +178,7 @@ To-do list ![new](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme
 https://github.com/airesvsg/to-do-list-acf-to-rest-api
 
 
-Get ACF Fields Recursively ![new](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/new-v3.1.png)
+Get ACF Fields Recursively![new](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/new-v3.1.png)
 ====
 https://github.com/airesvsg/acf-to-rest-api-recursive
 
