@@ -12,6 +12,7 @@ https://wordpress.org/plugins/acf-to-rest-api/
 - [Field Settings ![new](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/new-v3.1.png)](#field-settings)
 - [Editing the Fields](#editing-the-fields)
 - [Examples](#examples)
+- [Get ACF Fields Recursively ![new](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/new-v3.1.png)](#get-acf-fields-recursively)
 - [Cache](#cache)
 
 Installation
@@ -175,6 +176,21 @@ https://github.com/airesvsg/acf-to-rest-api-example
 To-do list ![new](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/new-v3.1.png)
 
 https://github.com/airesvsg/to-do-list-acf-to-rest-api
+
+
+Get ACF Fields Recursively ![new](http://airesgoncalves.com.br/screenshot/acf-to-rest-api/readme/new-v3.1.png)
+====
+https://github.com/airesvsg/acf-to-rest-api-recursive
+
+More details:
+
+Issues
+https://github.com/airesvsg/acf-to-rest-api/issues/109
+https://github.com/airesvsg/acf-to-rest-api/issues/223
+https://github.com/airesvsg/acf-to-rest-api/issues/9
+
+Pull Request
+https://github.com/airesvsg/acf-to-rest-api/pull/95
 
 Cache
 ====

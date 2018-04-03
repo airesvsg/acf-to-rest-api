@@ -13,7 +13,7 @@ Exposes Advanced Custom Fields Endpoints in the WordPress REST API
 == Description ==
 Exposes [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/) Endpoints in the [WordPress REST API](https://developer.wordpress.org/rest-api/)
 
-**See details on GitHub:** http://github.com/airesvsg/acf-to-rest-api
+**See details on GitHub:** [https://github.com/airesvsg/acf-to-rest-api/](https://github.com/airesvsg/acf-to-rest-api/)
 
 == Installation ==
 1. Copy the `acf-to-rest-api` folder into your `wp-content/plugins` folder
