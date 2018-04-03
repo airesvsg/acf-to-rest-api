@@ -184,13 +184,13 @@ https://github.com/airesvsg/acf-to-rest-api-recursive
 
 More details:
 
-Issues
-https://github.com/airesvsg/acf-to-rest-api/issues/109
-https://github.com/airesvsg/acf-to-rest-api/issues/223
-https://github.com/airesvsg/acf-to-rest-api/issues/9
+- Issues
+  - https://github.com/airesvsg/acf-to-rest-api/issues/109
+  - https://github.com/airesvsg/acf-to-rest-api/issues/223
+  - https://github.com/airesvsg/acf-to-rest-api/issues/9
 
-Pull Request
-https://github.com/airesvsg/acf-to-rest-api/pull/95
+- Pull Request
+  - https://github.com/airesvsg/acf-to-rest-api/pull/95
 
 Cache
 ====
