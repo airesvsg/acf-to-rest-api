@@ -119,16 +119,19 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 		}
 
 		public function delete_item( $request ) {
-			$fields = $this->acf->get_fields( $request )['acf'];
-			$id    = $this->acf->get_id( $request );
-			if ( is_array( $fields ) && count( $fields ) > 0 ) {
-				foreach ( $fields as $key => $value ) {
-					if ( function_exists( 'delete_field' ) ) {
-						delete_field( $key, $id );
+			$fields = $this->acf->get_fields( $request );
+			if ( $fields && isset( $fields['acf'] ) ) {
+				$fields_acf = $fields['acf'];
+				$id = $this->acf->get_id( $request );
+				if ( is_array( $fields_acf ) && count( $fields_acf ) > 0 ) {
+					foreach ( $fields_acf as $key => $value ) {
+						if ( function_exists( 'delete_field' ) ) {
+							delete_field( $key, $id );
+						}
 					}
-				}
 
-				return new WP_REST_Response( $fields, 200 );
+					return new WP_REST_Response( $fields, 200 );
+				}
 			}
 
 			return new WP_Error( 'cant_delete_item', __( 'Cannot delete item', 'acf-to-rest-api' ), array( 'status' => 500, 'fields' => $fields ) );
