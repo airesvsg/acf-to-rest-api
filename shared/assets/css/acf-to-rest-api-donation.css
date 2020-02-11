@@ -1,0 +1,67 @@
+.acf-to-rest-api-donation-notice {
+	background: #fff;
+	border: 0;
+	border-radius: 4px;
+	color: #cd331f;
+	padding: 1px 5px;
+	position: relative;
+}
+
+.acf-to-rest-api-donation-button-notice-dismiss:focus {
+	box-shadow: none;
+}
+
+.acf-to-rest-api-donation-button-notice-dismiss:hover {
+	opacity: .5;
+}
+
+.acf-to-rest-api-donation-button-notice-dismiss:before {
+	color: #FF8676;
+}
+
+.acf-to-rest-api-donation-plugin-name,
+.acf-to-rest-api-donation-button {
+	background: #fff;
+	border: 1px solid #cd331f;
+	border-radius: 4px;
+	color: #cd331f;
+	margin-right: 5px;
+	padding: 2px 15px;
+	text-decoration: none;
+}
+
+.acf-to-rest-api-donation-plugin-name,
+.acf-to-rest-api-donation-button:hover {
+	background: #cd331f;
+	color: #fff;
+}
+
+.acf-to-rest-api-donation-plugin-name {
+	font-weight: bold;
+}
+
+.acf-to-rest-api-donation-button:hover .dashicons-heart {
+	animation: .8s infinite heart_beat;
+}
+
+.acf-to-rest-api-donation-button:focus {
+	box-shadow: none;
+}
+
+@keyframes heart_beat {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.1);
+  }
+  40% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

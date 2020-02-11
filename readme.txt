@@ -1,10 +1,10 @@
 === ACF to REST API ===
 Contributors: airesvsg
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=airesvsg%40gmail%2ecom&lc=BR&item_name=Aires%20Goncalves&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=E5M7HDWNPFVF4&lc=BR&item_name=Aires%20Goncalves&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest
 Tags: acf, api, rest, wp-api, wp-rest-api, json, wp, wordpress, wp-rest-api, wordpress-rest-api
 Requires at least: 4.6
-Tested up to: 4.9.1
-Stable tag: 3.1.0
+Tested up to: 5.3.2
+Stable tag: 3.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,6 +20,11 @@ Exposes [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-f
 2. Activate the `ACF to REST API` plugin via the plugin admin page
 
 == Changelog ==
+
+= 3.2.0 =
+moving class-acf-to-rest-api-settings.php to shared/include/admin/classes
+adding donation notice
+update tested up
 
 = 3.1.0 =
 fix indentation
