@@ -49,7 +49,8 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 		}
 
 		public function register_field() {
-			register_rest_field( $this->type, 'acf', array(
+			$type = ( 'post_tag' === $this->type ) ? 'tag' : $this->type;
+			register_rest_field( $type, 'acf', array(
 				'get_callback' => array( $this, 'register_field_callback' ),
 				'schema' => array(
 					'description' => __( 'Expose advanced custom fields.', 'acf-to-rest-api' ),
@@ -123,7 +124,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 								update_field( $field['key'], $value, $item['id'] );
 							} else {
 								do_action( 'acf/update_value', $value, $item['id'], $field );
-							}							
+							}
 						}
 					}
 				}
@@ -136,13 +137,13 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 
 		public function rest_insert( $object, $request, $creating ) {
 			if ( $request instanceof WP_REST_Request ) {
-				$id = $this->acf->get_id( $object );				
+				$id = $this->acf->get_id( $object );
 				if ( ! $id ) {
 					$id = $this->acf->get_id( $request );
 				}
 				$request->set_param( 'id', $id );
 			}
-			
+
 			return $this->update_item( $request );
 		}
 
