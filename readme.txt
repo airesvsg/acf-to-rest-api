@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=E5M7H
 Tags: acf, api, rest, wp-api, wp-rest-api, json, wp, wordpress, wp-rest-api, wordpress-rest-api
 Requires at least: 4.6
 Tested up to: 5.4.2
-Stable tag: 3.3.0
+Stable tag: 3.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,6 +20,9 @@ Exposes [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-f
 2. Activate the `ACF to REST API` plugin via the plugin admin page
 
 == Changelog ==
+
+= 3.3.1 =
+fix endpoint with field name - exemple: /wp-json/acf/v3/posts/{id}/{field-name}
 
 = 3.3.0 =
 fix vulnerabilities ( https://github.com/airesvsg/acf-to-rest-api/issues/317 ) - Thanks to Hoseta
