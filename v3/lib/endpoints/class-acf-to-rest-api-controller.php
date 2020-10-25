@@ -37,6 +37,11 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 					'callback'            => array( $this, 'update_item' ),
 					'permission_callback' => array( $this, 'update_item_permissions_check' ),
 				),
+				array(
+					'methods'             => WP_REST_Server::DELETABLE,
+					'callback'            => array( $this, 'delete_item' ),
+					'permission_callback' => array( $this, 'delete_item_permissions_check' ),
+				),
 			) );
 
 			register_rest_route( $this->namespace, '/' . $this->rest_base, array(
@@ -109,6 +114,29 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 			return apply_filters( 'acf/rest_api/item_permissions/update', current_user_can( 'edit_posts' ), $request, $this->type );
 		}
 
+		public function delete_item_permissions_check( $request ) {
+			return apply_filters( 'acf/rest_api/item_permissions/delete', current_user_can( 'delete_posts' ), $request, $this->type );
+		}
+
+		public function delete_item( $request ) {
+			$fields = $this->acf->get_fields( $request );
+			if ( $fields && isset( $fields['acf'] ) ) {
+				$fields_acf = $fields['acf'];
+				$id = $this->acf->get_id( $request );
+				if ( is_array( $fields_acf ) && count( $fields_acf ) > 0 ) {
+					foreach ( $fields_acf as $key => $value ) {
+						if ( function_exists( 'delete_field' ) ) {
+							delete_field( $key, $id );
+						}
+					}
+
+					return new WP_REST_Response( $fields, 200 );
+				}
+			}
+
+			return new WP_Error( 'cant_delete_item', __( 'Cannot delete item', 'acf-to-rest-api' ), array( 'status' => 500, 'fields' => $fields ) );
+		}
+
 		public function update_item( $request ) {
 			$item = $this->prepare_item_for_database( $request );
 			if ( is_array( $item ) && count( $item ) > 0 ) {
@@ -123,7 +151,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 								update_field( $field['key'], $value, $item['id'] );
 							} else {
 								do_action( 'acf/update_value', $value, $item['id'], $field );
-							}							
+							}
 						}
 					}
 				}
@@ -136,13 +164,13 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 
 		public function rest_insert( $object, $request, $creating ) {
 			if ( $request instanceof WP_REST_Request ) {
-				$id = $this->acf->get_id( $object );				
+				$id = $this->acf->get_id( $object );
 				if ( ! $id ) {
 					$id = $this->acf->get_id( $request );
 				}
 				$request->set_param( 'id', $id );
 			}
-			
+
 			return $this->update_item( $request );
 		}
 
