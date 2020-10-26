@@ -83,7 +83,13 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 				return new WP_Error( 'cant_get_items', __( 'Cannot get items', 'acf-to-rest-api' ), array( 'status' => 500 ) );
 			}
 
-			$this->set_default_parameters( $request );
+            $this->set_default_parameters( $request );
+            $items = $this->controller->get_items( $request );
+
+            if( !empty( $items->errors ) ) {
+                return new WP_Error(400,'Bad Request', $items->errors);
+            }
+
 			$data = $this->controller->get_items( $request )->get_data();
 
 			$response = array();
