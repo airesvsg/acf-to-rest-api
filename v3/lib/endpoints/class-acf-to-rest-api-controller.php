@@ -84,7 +84,20 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 			}
 
 			$this->set_default_parameters( $request );
-			$data = $this->controller->get_items( $request )->get_data();
+			$items = $this->controller->get_items( $request );
+			if (is_wp_error($items)) {
+				return new WP_Error(
+					$items->get_error_code(),
+					$items->get_error_message(),
+					$items->get_error_data()
+				);
+			} else {
+				if (method_exists($items, 'get_data')) {
+					$data = $items->get_data();
+				} else {
+					return new WP_Error( 'cant_get_items_data', __( 'Cannot get items data', 'acf-to-rest-api' ), array( 'status' => 500 ) );
+				}
+			}
 
 			$response = array();
 			if ( ! empty( $data ) ) {
