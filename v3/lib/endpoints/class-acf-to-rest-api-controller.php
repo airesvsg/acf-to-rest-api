@@ -92,6 +92,14 @@ if ( ! class_exists( 'ACF_To_REST_API_Controller' ) ) {
 					$items->get_error_data()
 				);
 			} else {
+				if (method_exists($items, 'get_headers')) {
+					$restServer = rest_get_server();
+					$headers = $items->get_headers();
+					foreach ($headers as $header => $value) {
+						$restServer->send_header($header, $value);
+					}
+				}
+				
 				if (method_exists($items, 'get_data')) {
 					$data = $items->get_data();
 				} else {
