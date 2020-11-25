@@ -132,13 +132,11 @@ if ( ! class_exists( 'ACF_To_REST_API_ACF_API' ) ) {
 
 			if ( function_exists( 'acf_get_field_groups' ) && function_exists( 'acf_get_fields' ) && function_exists( 'acf_extract_var' ) ) {
 
-				if ( strpos( $id, 'user_' ) !== false ) {
+				if ( $this->type == "user" ) {
 					$filter = array(
-						'user_id' => (int) str_replace( 'user_', '', $id ),
+						'user_id' => $this->id,
 						'user_form' => 'all'
 					);
-				} elseif ( strpos( $id, 'taxonomy_' ) !== false ) {
-					$filter = array( 'ef_taxonomy' => (int)str_replace( 'taxonomy_', '', $id ) );
 				} else {
 					$filter = array( 'post_id' => $id );
 				}
