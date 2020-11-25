@@ -134,7 +134,7 @@ if ( ! class_exists( 'ACF_To_REST_API_ACF_API' ) ) {
 
 				if ( $this->type == "user" ) {
 					$filter = array(
-						'user_id' => $this->id,
+						'user_id' => (int) str_replace( 'user_', '', $id ),
 						'user_form' => 'all'
 					);
 				} else {
