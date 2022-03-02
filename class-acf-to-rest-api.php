@@ -67,10 +67,12 @@ if ( ! class_exists( 'ACF_To_REST_API' ) ) {
 		}
 
 		private static function hooks() {
-			add_action( 'init', array( __CLASS__, 'load_plugin_textdomain' ) );
+			$acf_plugin_version = get_option('acf_version');
+			$hook_type = $acf_plugin_version >= '5.12' ? 'rest_pre_dispatch' : 'rest_api_init';
 
+			add_action( 'init', array( __CLASS__, 'load_plugin_textdomain' ) );
 			if ( self::is_plugin_active( 'all' ) ) {
-				add_action( 'rest_api_init', array( __CLASS__, 'create_rest_routes' ), 10 );
+				add_action($hook_type, array( __CLASS__, 'create_rest_routes' ), 10 );
 				if ( self::$default_request_version == self::handle_request_version() ) {
 					ACF_To_REST_API_ACF_Field_Settings::hooks();
 				}
