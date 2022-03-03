@@ -21,6 +21,9 @@ Exposes [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-f
 
 == Changelog ==
 
+= 3.3.3 =
+fix issue with ACF 5.12 ( https://github.com/airesvsg/acf-to-rest-api/issues/398 ) - Thanks to Jack Pallot
+
 = 3.3.2 =
 updating donation link
 
