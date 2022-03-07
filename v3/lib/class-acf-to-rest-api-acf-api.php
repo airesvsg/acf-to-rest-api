@@ -74,7 +74,7 @@ if ( ! class_exists( 'ACF_To_REST_API_ACF_API' ) ) {
 		public function get_fields( $request ) {
 			$data  = array();
 			$field = null;
-			
+
 			if ( $request instanceof WP_REST_Request ) {
 				$field = $request->get_param( 'field' );
 			}
@@ -131,7 +131,17 @@ if ( ! class_exists( 'ACF_To_REST_API_ACF_API' ) ) {
 			$fields_tmp = array();
 
 			if ( function_exists( 'acf_get_field_groups' ) && function_exists( 'acf_get_fields' ) && function_exists( 'acf_extract_var' ) ) {
-				$field_groups = acf_get_field_groups( array( 'post_id' => $id ) );
+
+				if ( $this->type == "user" ) {
+					$filter = array(
+						'user_id' => (int) str_replace( 'user_', '', $id ),
+						'user_form' => 'all'
+					);
+				} else {
+					$filter = array( 'post_id' => $id );
+				}
+
+				$field_groups = acf_get_field_groups( $filter );
 
 				if ( is_array( $field_groups ) && ! empty( $field_groups ) ) {
 					foreach ( $field_groups as $field_group ) {
