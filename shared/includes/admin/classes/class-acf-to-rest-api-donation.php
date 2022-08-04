@@ -8,7 +8,7 @@ if ( ! class_exists( 'ACF_To_REST_API_Donation' ) ) {
 
 	class ACF_To_REST_API_Donation {
 
-		const DONATION_URL = 'https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=E5M7HDWNPFVF4&lc=BR&item_name=Aires%20Goncalves&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest';
+		const DONATION_URL = 'https://www.paypal.com/donate?hosted_button_id=P4DVDKW4ZV7GE&source=url';
 
 		private static $version_meta = 'acf_to_rest_api_donation_version';
 

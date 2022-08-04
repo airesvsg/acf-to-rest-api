@@ -4,7 +4,7 @@
  * Description: Exposes Advanced Custom Fields Endpoints in the WordPress REST API
  * Author: Aires Gonçalves
  * Author URI: http://github.com/airesvsg
- * Version: 3.2.0
+ * Version: 3.3.3
  * Plugin URI: http://github.com/airesvsg/acf-to-rest-api
  */
 
@@ -16,7 +16,7 @@ if ( ! class_exists( 'ACF_To_REST_API' ) ) {
 
 	class ACF_To_REST_API {
 
-		const VERSION = '3.2.0';
+		const VERSION = '3.3.3';
 
 		private static $old_request_version     = 2;
 		private static $default_request_version = 3;
@@ -67,10 +67,12 @@ if ( ! class_exists( 'ACF_To_REST_API' ) ) {
 		}
 
 		private static function hooks() {
-			add_action( 'init', array( __CLASS__, 'load_plugin_textdomain' ) );
+			$acf_plugin_version = get_option( 'acf_version' );
+			$hook_type = $acf_plugin_version >= '5.12' ? 'rest_pre_dispatch' : 'rest_api_init';
 
+			add_action( 'init', array( __CLASS__, 'load_plugin_textdomain' ) );
 			if ( self::is_plugin_active( 'all' ) ) {
-				add_action( 'rest_api_init', array( __CLASS__, 'create_rest_routes' ), 10 );
+				add_action( $hook_type, array( __CLASS__, 'create_rest_routes' ), 10 );
 				if ( self::$default_request_version == self::handle_request_version() ) {
 					ACF_To_REST_API_ACF_Field_Settings::hooks();
 				}
