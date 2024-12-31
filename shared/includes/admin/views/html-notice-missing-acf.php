@@ -23,6 +23,6 @@ if ( current_user_can( 'install_plugins' ) ) {
 ?>
 
 <div class="notice error is-dismissible">
-	<p><strong><?php esc_html_e( 'ACF to REST API', 'act-to-rest-api' ); ?></strong> <?php esc_html_e( 'depends on the last version of Advanced Custom Fields to work!', 'acf-to-rest-api' ); ?></p>
+	<p><strong><?php esc_html_e( 'ACF to REST API', 'acf-to-rest-api' ); ?></strong> <?php esc_html_e( 'depends on the last version of Advanced Custom Fields to work!', 'acf-to-rest-api' ); ?></p>
 	<p><a href="<?php echo esc_url( $url ); ?>" class="button button-primary"<?php if ( $target ) : ?> target="_blank"<?php endif; ?>><?php esc_html_e( $action . ' Advanced Custom Fields', 'acf-to-rest-api' ); ?></a></p>
 </div>

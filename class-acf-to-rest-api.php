@@ -4,7 +4,7 @@
  * Description: Exposes Advanced Custom Fields Endpoints in the WordPress REST API
  * Author: Aires Gonçalves
  * Author URI: http://github.com/airesvsg
- * Version: 3.3.3
+ * Version: 3.3.4
  * Plugin URI: http://github.com/airesvsg/acf-to-rest-api
  */
 
@@ -16,7 +16,7 @@ if ( ! class_exists( 'ACF_To_REST_API' ) ) {
 
 	class ACF_To_REST_API {
 
-		const VERSION = '3.3.3';
+		const VERSION = '3.3.4';
 
 		private static $old_request_version     = 2;
 		private static $default_request_version = 3;
